@@ -31,7 +31,7 @@ block content
                     -}
 
                     - for(var answer in posts[post].a)
-                        div(id="answer" class="flex row evenly bLight5 p1 m1")
+                        div(id="answer-container" class="flex column between max-h3em bLight5 p1 m1")
                             div(id="user")= posts[post].a[answer].u + " Answered:"
                             div(id="answer")= posts[post].a[answer].a
 
