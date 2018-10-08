@@ -19,19 +19,19 @@ block content
         - for(var post = posts.length-1; post >= 0; post--)
             - let displayAnswerForm = "none";
             - let postID = posts[post].id;
-            div(id="post" class="flex column center-text w20pc bDark5 m2 p1")
+            div(id="post" class="flex column center-text w20pc bPastelGreen m2 p1 cBlack")
                 div(class="flex row center")
                     b(id="username")= posts[post].u + " Asked:"
                 div(id="question" class="m1")= posts[post].q
                 
-                div(id="answers" class="flex column center bLight1")
+                div(id="answers" class="flex column center bLight5")
                     -if(posts[post].a.length <= 0){
                         b(class="p1") There's no answers yet, be the first!
                     -   displayAnswerForm = "block";
                     -}
 
                     - for(var answer in posts[post].a)
-                        div(id="answer" class="flex row evenly bLight1 p1 m1")
+                        div(id="answer" class="flex row evenly bLight5 p1 m1")
                             div(id="user")= posts[post].a[answer].u + " Answered:"
                             div(id="answer")= posts[post].a[answer].a
 
