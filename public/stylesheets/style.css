@@ -10,7 +10,7 @@ body {
 body {
   font-family: Areal, sans-serif;
   color: #fff;
-  background: #1b1b1b;
+  background: #191919;
 }
 a {
   text-decoration: none;
@@ -18,7 +18,15 @@ a {
 #header {
   clip-path: inset(0);
 }
-#header::before {
+#header {
+  box-shadow: #000 -2px 0px 10px 0px;
+}
+#mark {
+  clip-path: inset(0);
+  height: 100%;
+  width: 20%;
+}
+#mark::before {
   content: "";
   position: absolute;
   right: 0em;
@@ -28,7 +36,7 @@ a {
   transform: rotate(-25deg);
   background: rgba(255,255,255,0.4);
 }
-#header::after {
+#mark::after {
   content: "";
   position: absolute;
   right: 0em;
@@ -398,7 +406,7 @@ a {
   width: 100%;
   height: 2em;
   font-size: 1.5em;
-  background: #09484a;
+  background: #00959a;
   padding-left: 0.4em;
   margin-bottom: 0.2em;
 }
@@ -478,6 +486,9 @@ a {
 }
 .bGreen {
   background: #9dc34c;
+}
+.bPastelGreen {
+  background: #00959a;
 }
 /*Padding
   -----------------------------*/
@@ -577,6 +588,12 @@ a {
 }
 /*Text color
   -----------------------------*/
+.cWhite {
+  color: #fff;
+}
+.cBlack {
+  color: #000;
+}
 .cYellow {
   color: #f9b72a;
 }
