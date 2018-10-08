@@ -2,7 +2,16 @@ const express = require('express');
 const fs = require('fs');
 const router = express.Router();
 
-let postsJSON = JSON.parse(fs.readFileSync('./database/json/QA.json'));
+const getJSON = async () => {
+  console.log("Json was fetched");
+  let jsonData = await require("./database/json/QA.json");
+  return JSON.parse(jsonData);
+}
+
+const postJSON = (data) => {
+  fs.writeFileSync('./database/json/QA.json', JSON.stringify(data), 'utf8');
+  console.log("Json was posted");
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,9 +30,10 @@ router.post('/', (req, res, next) => {
   }
   let question = sanitize(req.body.question);
 
-  postsJSON.push({'id': newPostID(), 'q':question, 'u':name, 'a':[]});
-  
-  fs.writeFileSync('./database/json/QA.json', JSON.stringify(postsJSON), 'utf8');
+  let jsonData = getJSON();
+  jsonData.push({'id': newPostID(), 'q':question, 'u':name, 'a':[]});
+
+  postJSON(jsonData);
 });
 
 module.exports = router;
@@ -35,9 +45,10 @@ function sanitize(str) {
 function newPostID(){
   let newID = randString(8);
   let newIDIsUnique = true;
+  let jsonData = getJSON();
 
-  for(var post in postsJSON){
-    if(postsJSON[post].id == newID){
+  for(var post in jsonData){
+    if(jsonData[post].id == newID){
       newIDIsUnique = false;
     }
   }

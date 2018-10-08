@@ -2,30 +2,43 @@ const express = require('express');
 const fs = require('fs');
 const router = express.Router();
 
-let postsJSON = JSON.parse(fs.readFileSync("./database/json/QA.json"));
+const getJSON = (url) => {
+  console.log("Got json data");
+  return JSON.parse(fs.readFileSync(url));
+}
+
+const postJSON = (data, url) => {
+  fs.writeFileSync(url, JSON.stringify(data), 'utf8');
+  console.log("Json was posted");
+}
 
 router.get('/', function(req, res, next) {
   res.render('posts', {
     title: 'Questions & Answers',
-    posts: postsJSON
+    posts: getJSON('./database/json/QA.json')
   });
 });
 
-router.post('/answer', (req, res, next) => {
+router.post('/answer', async (req, res, next) => {
   res.redirect('/');
 
   let id = sanitize(req.body.id);
   let name = sanitize(req.body.name);
+
   console.log("name: "+name);
+  
   if(name.length <= 0){
     name = "Anon";
   }
+
   let answer = sanitize(req.body.answer);
 
-  for(var post in postsJSON){
-    if(postsJSON[post].id == id){
-      postsJSON[post].a.push({'u':name, 'a': answer});
-      fs.writeFileSync('./database/json/QA.json', JSON.stringify(postsJSON), 'utf8');
+  let jsonData = getJSON('./database/json/QA.json');
+
+  for(var post in jsonData){
+    if(jsonData[post].id == id){
+      jsonData[post].a.push({'u':name, 'a': answer});
+      postJSON(jsonData, './database/json/QA.json');
     }
   }
 

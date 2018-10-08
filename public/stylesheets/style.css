@@ -9,8 +9,8 @@ body {
 }
 body {
   font-family: Areal, sans-serif;
-  color:#26292a;
-  background:#e9e9e9;
+  color: #fff;
+  background: #1b1b1b;
 }
 a {
   text-decoration: none;
@@ -18,15 +18,7 @@ a {
 #header {
   clip-path: inset(0);
 }
-#header {
-  box-shadow: black -2px 0px 10px 0px;
-}
-
-#mark {
-  clip-path: inset(0);
-  height: 100%;
-  width: 20%;
-}#mark::before {
+#header::before {
   content: "";
   position: absolute;
   right: 0em;
@@ -35,7 +27,8 @@ a {
   height: 10em;
   transform: rotate(-25deg);
   background: rgba(255,255,255,0.4);
-}#mark::after {
+}
+#header::after {
   content: "";
   position: absolute;
   right: 0em;
@@ -45,7 +38,6 @@ a {
   transform: rotate(-25deg);
   background: rgba(255,255,255,0.2);
 }
-
 /* Flex classes
   -------------------------------------------------------------*/
 .flex {
@@ -406,7 +398,7 @@ a {
   width: 100%;
   height: 2em;
   font-size: 1.5em;
-  background: #00959a;
+  background: #09484a;
   padding-left: 0.4em;
   margin-bottom: 0.2em;
 }
@@ -486,9 +478,6 @@ a {
 }
 .bGreen {
   background: #9dc34c;
-}
-.bPastelGreen{
-  background: #00959a;
 }
 /*Padding
   -----------------------------*/
@@ -586,16 +575,13 @@ a {
 .m10 {
   margin: 10em;
 }
-  /*Text color
+/*Text color
   -----------------------------*/
-  .cWhite{
-    color:white;
-}.cBlack{
-    color:black;
-}.cYellow{
-    color: #F9B72A;
-}.cGreen{
-    color: #9DC34C;
+.cYellow {
+  color: #f9b72a;
+}
+.cGreen {
+  color: #9dc34c;
 }
 /*Text size
   -----------------------------*/
