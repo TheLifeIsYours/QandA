@@ -1,0 +1,14 @@
+div(id="answerForm" class="flex column evenly" style=`display:${displayAnswerForm};`)
+    div(class="h1em")
+    form(action="/answer" method="post" class="flex column bLight1 p1")
+        input(id="" type="hidden" name="id" value=`${postID}`)
+        div(class="flex row evenly")
+            b Name:
+            input(id="nameInputField" name="name" placeholder="Anon" value="")
+        div(class="h1em")
+        div(class="flex row evenly")
+            b Answer:
+            input(id="answerInputField" name="answer" type="text" pattern="^.{0,200}$" required)
+        div(class="h1em")
+        div(class="flex center")
+            input(id="answerForm-SubmitButton" class="buttn w100" type="submit" value="submit")

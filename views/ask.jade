@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    div(class="flex row evenly h100pc")
+        div(class="w40pc")
+        div(class="w20pc flex column evenly")
+            div(class="h5pc")
+            form(action="/ask" method="post" id="question-form" class="flex column evenly bDark5 h15pc")
+                div(class="flex row around")
+                    b Name:
+                    input(id="nameInputField" name="name" placeholder="Anon" value="")
+                div(class="flex row around")
+                    b Question:
+                    input(id="questionInputField" name="question" type="text" pattern="^.{0,200}$" required)
+                div(class="flex center")
+                    input(id="sumbitQuestion-button" class="buttn w100" type="submit", value="submit")
+            div(class="h70pc")
+        div(class="w40pc")

@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/socket.io.js')
+
+    script.
+      let socket = io(window.location.origin);
+      socket.on('welcome', (data) => {
+          console.log(data.message);
+          socket.emit('joined',{
+              "message":"Client connected to the server...",
+              "page": window.location.pathname
+          });
+      });
+
+  body
+    div(id="header" class="title flex between center-items")
+      div(class="w20pc")
+        div(id="title")= title
+      a(href="/" class="cGreen") Brows the questions
+      a(href="/ask") submit a question
+      a(href="/about") About us
+      div(class="w30pc")
+    block content
