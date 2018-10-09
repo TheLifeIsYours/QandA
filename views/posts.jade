@@ -1,41 +1,30 @@
 extends layout
 
 block content
-    script.
-        parent.addEventListener('click', function(e) {
-            if(e.target.id == 'answerForm-buttn'){
-                for(var child in e.target.parentElement.children){
-                    if(e.target.parentElement.children[child].id == "answerForm"){
-                        let target = e.target.parentElement.children[child].style.display;
+    div(class="flex row")
+        div(class="column w5pc")
+        div(id="posts" class="flex row wrap evenly w90pc items-start")
+            - for(var post = posts.length-1; post >= 0; post--)
+                - let displayAnswerForm = "none";
+                - let postID = posts[post].id;
+                div(id="post" class="flex column text-center w20em bPastelGreen m2 cDark")
+                    div(class="flex column between pt1 bLight2")
+                        div(class="flex row center")
+                            b(id="username")= posts[post].u
+                        div(id="question" class="m1")= posts[post].q
+                    
+                    div(id="answers" class="flex column start max-h30em auto-scroll-y bDark2")
+                        -if(posts[post].a.length <= 0){
+                            b(class="p1 cWhite") There's no answers yet, be the first!
+                        -   displayAnswerForm = "block";
+                        -}
 
-                        e.target.parentElement.children[child].style.display = target == "none" ? "block" : "none";
-                        break;
-                    }
-                }
-            }
-        });
+                        - for(var answer in posts[post].a)
+                            div(id="answer-container" class="flex column between min-h3em bLight9 p1 m1")
+                                div(id="user" class="text-left")= posts[post].a[answer].u
+                                div(id="answer" class="text-left pt1")= posts[post].a[answer].a
 
-    div(id="posts" class="flex row wrap around center-items")
-        - for(var post = posts.length-1; post >= 0; post--)
-            - let displayAnswerForm = "none";
-            - let postID = posts[post].id;
-            div(id="post" class="flex column text-center w20em bPastelGreen m2 cDark")
-                div(class="flex column between pt1 bLight2")
-                    div(class="flex row center")
-                        b(id="username")= posts[post].u
-                    div(id="question" class="m1")= posts[post].q
-                
-                div(id="answers" class="flex column center bDark2")
-                    -if(posts[post].a.length <= 0){
-                        b(class="p1 cWhite") There's no answers yet, be the first!
-                    -   displayAnswerForm = "block";
-                    -}
-
-                    - for(var answer in posts[post].a)
-                        div(id="answer-container" class="flex column between min-h3em bLight9 p1 m1")
-                            div(id="user" class="text-left")= posts[post].a[answer].u
-                            div(id="answer" class="text-left pt1")= posts[post].a[answer].a
-
-                div(id="answerForm-container" class="")
-                    div(id="answerForm-buttn" class="buttn fspc90 bold cGreen pt1 pb1") Give an answer
-                    include answer-form.jade
+                    div(id="answerForm-container" class="")
+                        div(id="answerForm-buttn" class="buttn fspc90 bold cGreen pt1 pb1") Give an answer
+                        include answer-form.jade
+        div(class="column w5pc")

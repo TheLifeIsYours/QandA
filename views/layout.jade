@@ -7,12 +7,39 @@ html
 
     script.
       let socket = io(window.location.origin);
+      
       socket.on('welcome', (data) => {
           console.log(data.message);
           socket.emit('joined',{
               "message":"Client connected to the server...",
               "page": window.location.pathname
           });
+      });
+
+      socket.on('siteUpdate', (data) => {
+        console.log(data.message);
+        document.getElementById("alerts").innerHTML = data.message;
+      });
+
+      parent.addEventListener('click', function(e) {
+          if(e.target.id == 'answerForm-SubmitButton'){
+            socket.emit('newSiteEvent-answer');
+          }
+
+          if(e.target.id == 'sumbitQuestion-button'){
+            socket.emit('newSiteEvent-question');
+          }
+          
+          if(e.target.id == 'answerForm-buttn'){
+              for(var child in e.target.parentElement.children){
+                  if(e.target.parentElement.children[child].id == "answerForm"){
+                      let target = e.target.parentElement.children[child].style.display;
+
+                      e.target.parentElement.children[child].style.display = target == "none" ? "block" : "none";
+                      break;
+                  }
+              }
+          }
       });
 
   body
@@ -24,4 +51,5 @@ html
         a(href="/ask" class="cWhite") Ask questions
         a(href="/about" class="cWhite") About Q&A
       div(id="mark" class="flex end center-items w15pc")
+        div(id="alerts" class="fs06em text-right bold z-index-top cDarkGreen pr015") 
     block content
