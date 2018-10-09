@@ -46,6 +46,9 @@ a {
 #answer-container {
   border-radius: 13px;
 }
+#answer {
+  overflow-wrap: break-word;
+}
 /* Resused styles
   ---------------------------------*/
 .title {
