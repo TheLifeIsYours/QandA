@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 module.exports = function (io) {
     io.on('connect', (client) => {
         client.emit('welcome', {'message':'Welcome to the server...'});
