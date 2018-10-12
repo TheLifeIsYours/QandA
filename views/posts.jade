@@ -4,25 +4,28 @@ block content
     div(class="flex row")
         div(class="column w5pc")
         div(id="posts" class="flex row wrap evenly w90pc items-start")
-            - for(var post = posts.length-1; post >= 0; post--)
+            - for(let post in posts)
                 - let displayAnswerForm = "none";
                 - let postID = posts[post].id;
                 div(id="post" class="flex column text-center w20em bPastelGreen m2 cDark")
                     div(class="flex column between pt1 bLight2")
                         div(class="flex row center")
-                            b(id="username")= posts[post].u
-                        div(id="question" class="m1")= posts[post].q
+                            b(id="username")= posts[post].name
+                        div(id="question" class="m1")= posts[post].question
                     
-                    div(id="answers" class="flex column start max-h30em auto-scroll-y bDark2")
-                        -if(posts[post].a.length <= 0){
-                            b(class="p1 cWhite") There's no answers yet, be the first!
-                        -   displayAnswerForm = "block";
-                        -}
+                    div(class="auto-scroll-y max-h30em")
+                        div(id="answers" class="flex column start bDark2")
+                            -if(posts[post].answers.length <= 0){
+                                b(class="p1 cWhite") There's no answers yet, be the first!
+                            -   displayAnswerForm = "block";
+                            -}
 
-                        - for(var answer in posts[post].a)
-                            div(id="answer-container" class="flex column between min-h3em bLight9 p1 m1")
-                                div(id="user" class="text-left")= posts[post].a[answer].u
-                                div(id="answer" class="text-left pt1")= posts[post].a[answer].a
+                            - for(let answer in posts[post].answers)
+                                div(id="answer-container" class="flex column between min-h3em bLight9 p1 m1")
+                                    div(class="m0 p0 text-left")
+                                        div(id="user")= posts[post].answers[answer].name
+                                        div(class="h1em")
+                                        div(id="answer")= posts[post].answers[answer].answer
 
                     div(id="answerForm-container" class="")
                         div(id="answerForm-buttn" class="buttn fspc90 bold cGreen pt1 pb1") Give an answer
