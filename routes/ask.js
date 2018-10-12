@@ -7,20 +7,15 @@ const router = express.Router();
 const firestore = new Firestore({
   projectId: 'tliyqa',
   keyFilename: './bin/firebaseCredentials.json',
+  timestampsInSnapshots: true
 });
 
 const qaCollection = firestore.collection('QandA');
 
 /*Routing
 -------------------------------------------------------*/
-router.use(function (req, res, next) {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
-  next()
-});
-
 router.get('/', function(req, res, next) {
+  res.setHeader("Content-Type", "text/html");
   res.render('ask', {
     title: 'Ask a question'
   });
@@ -41,7 +36,8 @@ const postQuestion = (content) => {
   let question = sanitize(content.question);
 
   return new Promise((resolve, reject) => {
-    qaCollection.add({a:""}).then(ref => {
+    qaCollection.add({a:""})
+    .then((ref) => {
       ref.set({id: `${ref.id}`, name: `${name}`, question: `${question}`, answers: []});
     })
     .then(resolve())

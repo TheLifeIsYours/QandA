@@ -14,14 +14,8 @@ const qaCollection = firestore.collection('QandA');
 
 /*Routing
 -------------------------------------------------------*/
-router.use(function (req, res, next) {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
-  next()
-});
-
 router.get('/', async (req, res, next) => {
+  res.setHeader("Content-Type", "text/html");
   res.render('posts', {
     title:  'Questions & Answers',
     posts:  await getPosts()
