@@ -2,6 +2,8 @@ const Firestore = require('@google-cloud/firestore');
 const express = require('express');
 const router = express.Router();
 
+/*Database setup
+-------------------------------------------------------*/
 const firestore = new Firestore({
   projectId: 'tliyqa',
   keyFilename: './bin/firebaseCredentials.json',
@@ -12,6 +14,13 @@ const qaCollection = firestore.collection('QandA');
 
 /*Routing
 -------------------------------------------------------*/
+router.use(function (req, res, next) {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  next()
+});
+
 router.get('/', async (req, res, next) => {
   res.render('posts', {
     title:  'Questions & Answers',
@@ -27,17 +36,14 @@ router.get('/', async (req, res, next) => {
 
 router.post('/answer', async (req, res, next) => {
   await postAnswer(req.body)
-    .then( res.redirect(`/`) )
+    .then( res.redirect('/') )
     .catch((err) => { res.redirect(`/error?error=${err}`) });
 });
 
 module.exports = router;
 
-
-
 /*Functions and other code
 -------------------------------------------------------*/
-
 const getPosts = () => {
   return new Promise((resolve, reject) => {
     qaCollection.get()
