@@ -3,12 +3,14 @@ extends layout
 block content
     div(class="flex column center h100pc")
         div(class="flex column center center-items")
-            form(action="/ask" method="post" id="question-form" class="flex column around bDark5 h20em w20em")
-                div(class="flex row around")
+            form(action="/ask" method="post" id="question-form" class="flex column around bPastelGreen p1em h20em w20em")
+                div(class="title") Ask a question
+                div(class="flex column around")
                     b Name:
-                    input(id="nameInputField" name="name" placeholder="Anon" value="")
-                div(class="flex row around")
+                    textarea(id="nameInputField" class="w100pc h1em p03em center-self resize-none fs1em lh1em br05em" name="name" pattern="^.{0,100}$" placeholder="Anon" value="")
+                div(class="flex column around")
                     b Question:
-                    input(id="questionInputField" name="question" type="text" pattern="^.{0,200}$" required)
+                    textarea(id="questionInputField" class="w100pc h4em p03em center-self resize-none fs1em lh1em br05em" name="question" pattern="^.{0,200}$" placeholder="Answer" required)
                 div(class="flex center")
-                    input(id="sumbitQuestion-button" class="buttn w100" type="submit", value="submit")
+                    input(id="sumbitQuestion-button" class="buttn w100pc h3em text-center" type="submit", value="submit")
+

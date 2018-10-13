@@ -16,18 +16,18 @@ block content
                     div(class="auto-scroll-y max-h30em")
                         div(id="answers" class="flex column start bDark2")
                             -if(posts[post].answers.length <= 0){
-                                b(class="p1 cWhite") There's no answers yet, be the first!
+                                b(class="p1em cWhite") There's no answers yet, be the first!
                             -   displayAnswerForm = "block";
                             -}
 
                             - for(let answer in posts[post].answers)
-                                div(id="answer-container" class="flex column between min-h3em bLight9 p1 m1")
-                                    div(class="m0 p0 text-left")
+                                div(id="answer-container" class="flex column between min-h3em bLight9 p1em m1")
+                                    div(class="m0 p0em text-left")
                                         div(id="user")= posts[post].answers[answer].name
                                         div(class="h1em")
                                         div(id="answer")= posts[post].answers[answer].answer
 
-                    div(id="answerForm-container" class="")
-                        div(id="answerForm-buttn" class="buttn fspc90 bold cGreen pt1 pb1") Give an answer
+                    div(id="answerForm-container" class="bDarkPurple cLightBlue")
+                        div(id="answerForm-buttn" class="buttn fspc90 bold pt1 pb1") Give an answer
                         include answer-form.jade
         div(class="column w5pc")

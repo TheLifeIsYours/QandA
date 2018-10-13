@@ -1,13 +1,13 @@
-div(id="answerForm" class="flex column evenly" style=`display:${displayAnswerForm};`)
-    form(action="/answer" method="post" class="flex column bLight5 p1")
+div(id="answerForm" class="flex column evenly bLight4" style=`display:${displayAnswerForm};`)
+    form(action="/answer" method="post" class="flex column p1em")
         input(id="" type="hidden" name="id" value=`${postID}`)
-        div(class="flex row evenly")
-            b Name:
-            input(id="nameInputField" name="name" placeholder="Anon" value="")
+        div(class="flex column items-start")
+            b(class="cDarkBlue") Name:
+            textarea(id="nameInputField" class="w100pc h1em p03em center-self resize-none fs1em lh1em br05em" name="name" pattern="^.{0,100}$" placeholder="Anon" value="")
         div(class="h1em")
-        div(class="flex row evenly")
-            b Answer:
-            input(id="answerInputField" name="answer" type="text" pattern="^.{0,200}$" required)
+        div(class="flex column items-start")
+            b(class="cDarkBlue") Answer:
+            textarea(id="answerInputField" class="w100pc h4em p03em center-self resize-none fs1em lh1em br05em" name="answer" pattern="^.{0,200}$" required)
         div(class="h1em")
         div(class="flex center")
-            input(id="answerForm-SubmitButton" class="buttn w100" type="submit" value="submit")
+            input(id="answerForm-SubmitButton" class="buttn w100pc h3em text-center" type="submit" value="Post")
